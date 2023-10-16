@@ -1,147 +1,29 @@
-import * as React from 'react';
+import React from "react"
+import Layout from "../components/layout"
 
-import AttributeGrid from '../components/AttributeGrid';
-import Container from '../components/Container';
-import Hero from '../components/Hero';
-import BlogPreviewGrid from '../components/BlogPreviewGrid';
-import Highlight from '../components/Highlight';
-import Layout from '../components/Layout/Layout';
-import ProductCollectionGrid from '../components/ProductCollectionGrid';
-import ProductCardGrid from '../components/ProductCardGrid';
-import Quote from '../components/Quote';
-import Title from '../components/Title';
+const IndexPage = () => (
+  <Layout>
+    <h1>Book a Ride</h1>
+    <p>Enter your details below to book a ride.</p>
+    <form action="/book-ride" method="post">
+      <label htmlFor="pickup">Pickup Location</label>
+      <input type="text" id="pickup" name="pickup" required />
 
-import { generateMockBlogData, generateMockProductData } from '../helpers/mock';
+      <label htmlFor="destination">Destination</label>
+      <input type="text" id="destination" name="destination" required />
 
-import * as styles from './index.module.css';
-import { Link, navigate } from 'gatsby';
+      <label htmlFor="date">Date</label>
+      <input type="date" id="date" name="date" required />
 
-const IndexPage = () => {
-  const newArrivals = generateMockProductData(3, 'shirt');
-  const blogData = generateMockBlogData(3);
+      <label htmlFor="time">Time</label>
+      <input type="time" id="time" name="time" required />
 
-  const goToShop = () => {
-    navigate('/shop');
-  };
+      <label htmlFor="passengers">Number of Passengers</label>
+      <input type="number" id="passengers" name="passengers" min="1" required />
 
-  return (
-    <Layout disablePaddingBottom>
-      {/* Hero Container */}
-      <Hero
-        maxWidth={'500px'}
-        image={'/banner1.png'}
-        title={'Essentials for all seasons'}
-        subtitle={'Discover new products'}
-        ctaText={'shop now'}
-        ctaAction={goToShop}
-      />
+      <button type="submit">Book Now</button>
+    </form>
+  </Layout>
+)
 
-      {/* Message Container */}
-      <div className={styles.messageContainer}>
-        <p>
-          This is an eCommerce website by{' '}
-          <span className={styles.gold}>EPASABUY.</span>
-        </p>
-        <p>
-          Powered by <span className={styles.gold}>Netlify</span> and{' '}
-          <span className={styles.gold}>Github</span>
-        </p>
-      </div>
-
-      {/* Collection Container */}
-      <div className={styles.collectionContainer}>
-        <Container size={'large'}>
-          <Title name={'New Collection'} />
-          <ProductCollectionGrid />
-        </Container>
-      </div>
-
-      {/* New Arrivals */}
-      <div className={styles.newArrivalsContainer}>
-        <Container>
-          <Title name={'New Arrivals'} link={'/shop'} textLink={'view all'} />
-          <ProductCardGrid
-            spacing={true}
-            showSlider
-            height={480}
-            columns={3}
-            data={newArrivals}
-          />
-        </Container>
-      </div>
-
-      {/* Highlight  */}
-      <div className={styles.highlightContainer}>
-        <Container size={'large'} fullMobile>
-          <Highlight
-            image={'/highlight.png'}
-            altImage={'highlight image'}
-            miniImage={'/highlightmin.png'}
-            miniImageAlt={'mini highlight image'}
-            title={'Luxury Knitwear'}
-            description={`This soft lambswool jumper is knitted in Scotland, using yarn from one of the world's oldest spinners based in Fife`}
-            textLink={'shop now'}
-            link={'/shop'}
-          />
-        </Container>
-      </div>
-
-      {/* Promotion */}
-      <div className={styles.promotionContainer}>
-        <Hero image={'/banner2.png'} title={`Discounted prices on some items`} />
-        <div className={styles.linkContainers}>
-          <Link to={'/shop'}>WOMAN</Link>
-          <Link to={'/shop'}>MAN</Link>
-        </div>
-      </div>
-
-      {/* Quote */}
-      <Quote
-        bgColor={'var(--standard-light-grey)'}
-        title={'about EPASABUY'}
-        quote={
-          '“We believe in two things: the pursuit of quality in everything we do, and looking after one another. Everything else should take care of itself.”'
-        }
-      />
-
-      {/* Blog Grid */}
-      <div className={styles.blogsContainer}>
-        <Container size={'large'}>
-          <Title name={'Journal'} subtitle={'Notes on life and style'} />
-          <BlogPreviewGrid data={blogData} />
-        </Container>
-      </div>
-
-      {/* Promotion */}
-      <div className={styles.sustainableContainer}>
-        <Hero
-          image={'/banner3.png'}
-          title={'We are Sustainable'}
-          subtitle={
-            'From caring for our land to supporting our people, discover the steps we’re taking to do more for the world around us.'
-          }
-          ctaText={'read more'}
-          maxWidth={'660px'}
-          ctaStyle={styles.ctaCustomButton}
-        />
-      </div>
-
-      {/* Social Media */}
-      <div className={styles.socialContainer}>
-        <Title
-          name={'Styled by You'}
-          subtitle={'Tag @epasabuyph to be featured.'}
-        />
-        <div className={styles.socialContentGrid}>
-          <img src={`/social/socialMedia1.png`} alt={'social media 1'} />
-          <img src={`/social/socialMedia2.png`} alt={'social media 2'} />
-          <img src={`/social/socialMedia3.png`} alt={'social media 3'} />
-          <img src={`/social/socialMedia4.png`} alt={'social media 4'} />
-        </div>
-      </div>
-      <AttributeGrid />
-    </Layout>
-  );
-};
-
-export default IndexPage;
+export default IndexPage
